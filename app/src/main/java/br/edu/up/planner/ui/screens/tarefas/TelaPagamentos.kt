@@ -34,7 +34,7 @@ fun TelaRotina(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Tela ROTINA",
+                    text = "Pagamentos",
                     Modifier.padding(30.dp),
                     fontSize = 40.sp
                 )

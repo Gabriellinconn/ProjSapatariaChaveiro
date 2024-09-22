@@ -31,7 +31,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.edu.up.planner.ui.screens.projetos.TelaProjetos
+import br.edu.up.planner.ui.screens.chaveiro.TelaProjetos
 import br.edu.up.planner.ui.screens.financas.TelaFinancas
 import br.edu.up.planner.ui.screens.tarefas.TarefasNavHost
 import kotlinx.coroutines.launch
@@ -114,9 +114,10 @@ private fun DrawerContent(
             }) {
             Icon(
                 //imageVector = Icons.Default.Call,
-                painter = painterResource(id = R.drawable.checklist),
+                painter = painterResource(id = R.drawable.sapato),
                 contentDescription = "c",
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(80.dp).
+                padding(10.dp),
                 tint = getColorTexto(ehRotaUm)
             )
             Text(text = "Sapataria", fontSize = 30.sp,
@@ -135,9 +136,10 @@ private fun DrawerContent(
             }) {
             Icon(
                 //imageVector = Icons.Default.Call,
-                painter = painterResource(id = R.drawable.checklist),
+                painter = painterResource(id = R.drawable.chave),
                 contentDescription = "c",
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(80.dp).
+                padding(10.dp),
                 tint = getColorTexto(ehRotaDois)
             )
             Text(text = "Chaveiro", fontSize = 30.sp,
@@ -155,12 +157,13 @@ private fun DrawerContent(
             }) {
             Icon(
                 //imageVector = Icons.Default.Call,
-                painter = painterResource(id = R.drawable.checklist),
+                painter = painterResource(id = R.drawable.cifrao),
                 contentDescription = "c",
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(80.dp).
+                padding(10.dp),
                 tint = getColorTexto(ehRotaTres)
             )
-            Text(text = "Gastos", fontSize = 30.sp,
+            Text(text = "Finanças", fontSize = 30.sp,
                 color = getColorTexto(ehRotaTres))
         }
     }

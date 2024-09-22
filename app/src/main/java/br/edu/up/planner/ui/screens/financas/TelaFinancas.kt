@@ -29,7 +29,7 @@ fun TelaFinancas(drawerState: DrawerState) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Tela FINANÇAS",
+                    text = "Seus Gastos",
                     Modifier.padding(30.dp),
                     fontSize = 40.sp
                 )

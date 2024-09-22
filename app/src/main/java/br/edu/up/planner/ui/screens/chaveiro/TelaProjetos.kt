@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.projetos
+package br.edu.up.planner.ui.screens.chaveiro
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +29,7 @@ fun TelaProjetos(drawerState: DrawerState) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Tela PROJETOS",
+                    text = "Serviços Chaveiro",
                     Modifier.padding(30.dp),
                     fontSize = 40.sp
                 )
