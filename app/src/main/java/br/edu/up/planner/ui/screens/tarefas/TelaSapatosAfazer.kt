@@ -55,15 +55,17 @@ fun TelaAfazeres(
             formaPagamento = 1,
             par = false,
             concluido = false,
+            pago = true,
             id = 1
         ),
         SapatosAfazer(
             nomeSapato = "Sapato Feminino",
             descricao = "Restaurar Taco e Sola",
             preco = 50.00,
-            formaPagamento = 2,
+            formaPagamento = 4,
             par = true,
             concluido = true,
+            pago = false,
             id = 2
         )
     )
@@ -99,12 +101,19 @@ fun TelaAfazeres(
 
 @Composable
 private fun TelaListagemAfazeres(sapatosAfazer: MutableList<SapatosAfazer>) {
+
     LazyColumn(
+
         modifier = Modifier.padding(top = 70.dp). fillMaxSize(),
 
         contentPadding = PaddingValues(16.dp)
+
     ) {
+
+
         items(sapatosAfazer) { sapatoAfazer ->
+
+
 
             Card(
                 modifier = Modifier
@@ -124,9 +133,15 @@ private fun TelaListagemAfazeres(sapatosAfazer: MutableList<SapatosAfazer>) {
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 5.dp)
                     )
+
                     Text(
                         text = sapatoAfazer.descricao,
                         fontSize = 16.sp,
+                        modifier = Modifier.padding(bottom = 5.dp)
+                    )
+                    Text(
+                        text = "#${sapatoAfazer.id}",
+                        fontSize = 14.sp,
                         modifier = Modifier.padding(bottom = 5.dp)
                     )
                     Text(
@@ -137,9 +152,10 @@ private fun TelaListagemAfazeres(sapatosAfazer: MutableList<SapatosAfazer>) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp),
+                            .padding(vertical = 5.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
+
                         Text(
                             text = "R$ ${sapatoAfazer.preco}",
                             fontSize = 16.sp,
@@ -151,16 +167,22 @@ private fun TelaListagemAfazeres(sapatosAfazer: MutableList<SapatosAfazer>) {
                                 1 -> "Dinheiro"
                                 2 -> "Cartão"
                                 3 -> "Pix"
-                                else -> "Outra Forma de Pagamento"
+                                else -> "Não informado"
                             },
                             fontSize = 16.sp
+                        )
+
+                        Text(
+                            text = if (sapatoAfazer.pago) "Pago" else "Não pago",
+                            color = if (sapatoAfazer.concluido) Color.Red else Color.Green,
+                            fontWeight = FontWeight.SemiBold
                         )
                     }
 
                     Text(
                         text = if (sapatoAfazer.concluido) "Concluído" else "Pendente",
                         color = if (sapatoAfazer.concluido) Color.Green else Color.Yellow,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -172,11 +194,12 @@ private fun TelaListagemAfazeres(sapatosAfazer: MutableList<SapatosAfazer>) {
 
 
 data class SapatosAfazer(
+    var pago: Boolean,
     var nomeSapato: String,
     var descricao: String,
     var concluido: Boolean = false,
     var preco: Double,
-    var formaPagamento: Int, //1 = dinheiro, 2 = cartão, 3 = pix.
+    var formaPagamento: Int, //1 = dinheiro, 2 = cartão, 3 = pix, 4 = não informado
     var par: Boolean = false,
     var id: Int? = null
 )
