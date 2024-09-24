@@ -31,14 +31,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.edu.up.planner.ui.screens.chaveiro.TelaProjetos
+import br.edu.up.planner.ui.screens.chaveiro.TelaChavesAfazer
 import br.edu.up.planner.ui.screens.financas.TelaFinancas
-import br.edu.up.planner.ui.screens.tarefas.TarefasNavHost
+import br.edu.up.planner.ui.screens.sapataria.ChaveiroNavHost
+import br.edu.up.planner.ui.screens.sapataria.SapatariaNavHost
 import kotlinx.coroutines.launch
 
-object PlannerRotas {
-    val TELA_TAREFAS_ROTA = "tela_um"
-    val TELA_PROJETOS_ROTA = "tela_dois"
+object SECRotas {
+    val TELA_SAPATOS_ROTA = "tela_um"
+    val TELA_CHAVES_ROTA = "tela_dois"
     val TELA_FINANCAS_ROTA = "tela_tres"
 }
 
@@ -62,15 +63,15 @@ fun PlannerNavDrawer(){
         content = {
             NavHost(
                 navController = navCtrlDrawer,
-                startDestination = PlannerRotas.TELA_TAREFAS_ROTA)
+                startDestination = SECRotas.TELA_SAPATOS_ROTA)
             {
-                composable(PlannerRotas.TELA_TAREFAS_ROTA) {
-                    TarefasNavHost(drawerState)
+                composable(SECRotas.TELA_SAPATOS_ROTA) {
+                    SapatariaNavHost(drawerState)
                 }
-                composable(PlannerRotas.TELA_PROJETOS_ROTA) {
-                    TelaProjetos(drawerState)
+                composable(SECRotas.TELA_CHAVES_ROTA) {
+                    ChaveiroNavHost(drawerState)
                 }
-                composable(PlannerRotas.TELA_FINANCAS_ROTA) {
+                composable(SECRotas.TELA_FINANCAS_ROTA) {
                     TelaFinancas(drawerState)
                 }
             }
@@ -87,11 +88,11 @@ private fun DrawerContent(
     val coroutineScope = rememberCoroutineScope()
 
     val currentBack by navController.currentBackStackEntryAsState()
-    val rotaAtual = currentBack?.destination?.route ?: PlannerRotas.TELA_TAREFAS_ROTA
+    val rotaAtual = currentBack?.destination?.route ?: SECRotas.TELA_SAPATOS_ROTA
 
-    val ehRotaUm = rotaAtual == PlannerRotas.TELA_TAREFAS_ROTA
-    val ehRotaDois = rotaAtual == PlannerRotas.TELA_PROJETOS_ROTA
-    val ehRotaTres = rotaAtual == PlannerRotas.TELA_FINANCAS_ROTA
+    val ehRotaUm = rotaAtual == SECRotas.TELA_SAPATOS_ROTA
+    val ehRotaDois = rotaAtual == SECRotas.TELA_CHAVES_ROTA
+    val ehRotaTres = rotaAtual == SECRotas.TELA_FINANCAS_ROTA
 
     Column(
         modifier = Modifier
@@ -107,7 +108,7 @@ private fun DrawerContent(
                 containerColor = getColorMenu(ehRotaUm)
             ),
             onClick = {
-                navController.navigate(PlannerRotas.TELA_TAREFAS_ROTA)
+                navController.navigate(SECRotas.TELA_SAPATOS_ROTA)
                 coroutineScope.launch {
                     drawerState.close()
                 }
@@ -129,7 +130,7 @@ private fun DrawerContent(
                 containerColor = getColorMenu(ehRotaDois)
             ),
             onClick = {
-                navController.navigate(PlannerRotas.TELA_PROJETOS_ROTA)
+                navController.navigate(SECRotas.TELA_CHAVES_ROTA)
                 coroutineScope.launch {
                     drawerState.close()
                 }
@@ -150,7 +151,7 @@ private fun DrawerContent(
                 containerColor = getColorMenu(ehRotaTres)
             ),
             onClick = {
-                navController.navigate(PlannerRotas.TELA_FINANCAS_ROTA)
+                navController.navigate(SECRotas.TELA_FINANCAS_ROTA)
                 coroutineScope.launch {
                     drawerState.close()
                 }

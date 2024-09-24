@@ -3,9 +3,6 @@ package br.edu.up.planner.ui.screens.util
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
@@ -17,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import br.edu.up.planner.ui.screens.tarefas.TelaUm
+import br.edu.up.planner.ui.screens.sapataria.TelaUm
 
 
 @Composable
@@ -26,7 +23,7 @@ fun TelaUmBottomBar(navController: NavController) {
         NavigationBarItem(
             selected = true,
             onClick = {
-                navController.navigate(TelaUm.TELA_AFAZERES_ROUTE)
+                navController.navigate(TelaUm.TELA_SAPATARIA_ROUTE)
             },
             icon = {
                 Icon(
@@ -40,7 +37,7 @@ fun TelaUmBottomBar(navController: NavController) {
         NavigationBarItem(
             selected = false,
             onClick = {
-                navController.navigate(TelaUm.TELA_ROTINA_ROUTE)
+                navController.navigate(TelaUm.TELA_PAGAMENTOS_ROUTE)
             }, icon = {
                 Icon(
                     imageVector = Icons.Default.ShoppingCart,
@@ -53,7 +50,7 @@ fun TelaUmBottomBar(navController: NavController) {
         NavigationBarItem(
             selected = false,
             onClick = {
-                navController.navigate(TelaUm.TELA_NOTAS_ROUTE)
+                navController.navigate(TelaUm.TELA_REALIZADOS_ROUTE)
             }, icon = {
                 Icon(
                     imageVector = Icons.Default.Check,

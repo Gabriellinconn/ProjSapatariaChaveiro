@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.tarefas
+package br.edu.up.planner.ui.screens.sapataria
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import br.edu.up.planner.ui.screens.util.PlannerTopBar
 import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
 
 @Composable
-fun TelaNotas(
+fun TelaRealizados(
             drawerState: DrawerState,
             navCtrlBottomNav: NavController
 ) {

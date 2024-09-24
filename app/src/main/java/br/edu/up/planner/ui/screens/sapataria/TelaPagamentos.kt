@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.chaveiro
+package br.edu.up.planner.ui.screens.sapataria
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,10 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.edu.up.planner.ui.screens.util.PlannerTopBar
+import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
 
 @Composable
-fun TelaProjetos(drawerState: DrawerState) {
+fun TelaPagamentos(
+            drawerState: DrawerState,
+            navCtrlBottomNav: NavController
+) {
 
     Scaffold(
         topBar = {
@@ -29,12 +34,12 @@ fun TelaProjetos(drawerState: DrawerState) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Serviços Chaveiro",
+                    text = "Pagamentos",
                     Modifier.padding(30.dp),
                     fontSize = 40.sp
                 )
             }
-        }
+        },
+        bottomBar = { TelaUmBottomBar(navCtrlBottomNav) }
     )
 }
-

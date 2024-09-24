@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.tarefas
+package br.edu.up.planner.ui.screens.sapataria
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,19 +33,67 @@ import androidx.navigation.compose.rememberNavController
 import br.edu.up.planner.ui.screens.util.PlannerTopBar
 import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
 
-object TarefasRota {
-    val TELA_LISTAR_AFAZERES_ROTA = "listar_afazeres"
-    val TELA_INCLUIR_AFAZER_ROTA = "incluir_afazer"
+object SapatosRota {
+    val TELA_LISTAR_SAPATOS_ROTA = "listar_sapatos"
+    val TELA_INCLUIR_SAPATOS_ROTA = "incluir_sapatos"
 }
 
 
 @Composable
-fun TelaAfazeres(
+fun TelaSapatosAfazer(
     drawerState: DrawerState,
     navCtrlBottomNav: NavController
 ) {
 
-    var serviços = mutableListOf(
+    var serviçosSapatos = mutableListOf(
+        SapatosAfazer(
+
+
+            nomeSapato = "Tênis Nike",
+            descricao = "Colar Sola",
+            preco = 18.00,
+            formaPagamento = 1,
+            par = false,
+            concluido = false,
+            pago = true,
+            id = 1
+        ),
+        SapatosAfazer(
+
+
+            nomeSapato = "Tênis Nike",
+            descricao = "Colar Sola",
+            preco = 18.00,
+            formaPagamento = 1,
+            par = false,
+            concluido = false,
+            pago = true,
+            id = 1
+        ),
+        SapatosAfazer(
+
+
+            nomeSapato = "Tênis Nike",
+            descricao = "Colar Sola",
+            preco = 18.00,
+            formaPagamento = 1,
+            par = false,
+            concluido = false,
+            pago = true,
+            id = 1
+        ),
+        SapatosAfazer(
+
+
+            nomeSapato = "Tênis Nike",
+            descricao = "Colar Sola",
+            preco = 18.00,
+            formaPagamento = 1,
+            par = false,
+            concluido = false,
+            pago = true,
+            id = 1
+        ),
         SapatosAfazer(
 
 
@@ -78,12 +126,12 @@ fun TelaAfazeres(
         content = { padding ->  padding
             NavHost(
                 navController = navCtrlTarefas,
-                startDestination = TarefasRota.TELA_LISTAR_AFAZERES_ROTA)
+                startDestination = SapatosRota.TELA_LISTAR_SAPATOS_ROTA)
             {
-                composable(TarefasRota.TELA_LISTAR_AFAZERES_ROTA) {
-                    TelaListagemAfazeres(serviços)
+                composable(SapatosRota.TELA_LISTAR_SAPATOS_ROTA) {
+                    TelaListagemSapatos(serviçosSapatos)
                 }
-                composable(TarefasRota.TELA_INCLUIR_AFAZER_ROTA) {
+                composable(SapatosRota.TELA_INCLUIR_SAPATOS_ROTA) {
                     Column(modifier = Modifier.fillMaxSize()) {
                         Spacer(modifier = Modifier.height(200.dp))
                         Text(text = "TELA DE INCLUIR AFAZER")
@@ -100,11 +148,11 @@ fun TelaAfazeres(
 }
 
 @Composable
-private fun TelaListagemAfazeres(sapatosAfazer: MutableList<SapatosAfazer>) {
+private fun TelaListagemSapatos(sapatosAfazer: MutableList<SapatosAfazer>) {
 
     LazyColumn(
 
-        modifier = Modifier.padding(top = 70.dp). fillMaxSize(),
+        modifier = Modifier.padding(top = 70.dp).padding(bottom = 90.dp).fillMaxSize(),
 
         contentPadding = PaddingValues(16.dp)
 
