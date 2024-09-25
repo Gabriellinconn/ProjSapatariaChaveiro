@@ -30,7 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.edu.up.planner.ui.screens.util.PlannerTopBar
+import br.edu.up.planner.ui.screens.util.SECTopBar
 import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
 
 object SapatosRota {
@@ -118,14 +118,14 @@ fun TelaSapatosAfazer(
         )
     )
 
-    val navCtrlTarefas = rememberNavController()
+    val navCtrlSapatos = rememberNavController()
 
 
     Scaffold(
-        topBar = { PlannerTopBar(drawerState) },
+        topBar = { SECTopBar(drawerState) },
         content = { padding ->  padding
             NavHost(
-                navController = navCtrlTarefas,
+                navController = navCtrlSapatos,
                 startDestination = SapatosRota.TELA_LISTAR_SAPATOS_ROTA)
             {
                 composable(SapatosRota.TELA_LISTAR_SAPATOS_ROTA) {

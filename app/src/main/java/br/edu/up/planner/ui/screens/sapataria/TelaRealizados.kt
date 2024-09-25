@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.edu.up.planner.ui.screens.util.PlannerTopBar
+import br.edu.up.planner.ui.screens.util.SECTopBar
 import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
 
 @Composable
@@ -24,7 +24,7 @@ fun TelaRealizados(
 
     Scaffold(
         topBar = {
-            PlannerTopBar(drawerState)
+            SECTopBar(drawerState)
         },
         content = { iPad ->
             iPad

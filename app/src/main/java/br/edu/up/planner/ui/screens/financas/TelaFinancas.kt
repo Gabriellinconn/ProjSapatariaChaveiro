@@ -12,14 +12,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.edu.up.planner.ui.screens.util.PlannerTopBar
+import br.edu.up.planner.ui.screens.util.SECTopBar
 
 @Composable
 fun TelaFinancas(drawerState: DrawerState) {
 
     Scaffold(
         topBar = {
-            PlannerTopBar(drawerState)
+            SECTopBar(drawerState)
         },
         content = { iPad ->
             iPad

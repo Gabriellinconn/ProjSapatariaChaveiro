@@ -31,9 +31,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.edu.up.planner.ui.screens.chaveiro.TelaChavesAfazer
 import br.edu.up.planner.ui.screens.financas.TelaFinancas
-import br.edu.up.planner.ui.screens.sapataria.ChaveiroNavHost
+import br.edu.up.planner.ui.screens.chaveiro.ChaveiroNavHost
+import br.edu.up.planner.ui.screens.pedido.PedidoNavHost
 import br.edu.up.planner.ui.screens.sapataria.SapatariaNavHost
 import kotlinx.coroutines.launch
 
@@ -41,6 +41,8 @@ object SECRotas {
     val TELA_SAPATOS_ROTA = "tela_um"
     val TELA_CHAVES_ROTA = "tela_dois"
     val TELA_FINANCAS_ROTA = "tela_tres"
+    val TELA_PEDIDOS_ROTA = "tela_quatro"
+
 }
 
 
@@ -48,7 +50,7 @@ object SECRotas {
     device = Devices.PIXEL
 )
 @Composable
-fun PlannerNavDrawer(){
+fun SECNavDrawer(){
 
     val drawerState = rememberDrawerState(
         initialValue = DrawerValue.Closed)
@@ -63,7 +65,7 @@ fun PlannerNavDrawer(){
         content = {
             NavHost(
                 navController = navCtrlDrawer,
-                startDestination = SECRotas.TELA_SAPATOS_ROTA)
+                startDestination = SECRotas.TELA_CHAVES_ROTA)
             {
                 composable(SECRotas.TELA_SAPATOS_ROTA) {
                     SapatariaNavHost(drawerState)
@@ -74,6 +76,10 @@ fun PlannerNavDrawer(){
                 composable(SECRotas.TELA_FINANCAS_ROTA) {
                     TelaFinancas(drawerState)
                 }
+                composable(SECRotas.TELA_PEDIDOS_ROTA) {
+                    PedidoNavHost(drawerState)
+                }
+
             }
         }
     )
@@ -88,11 +94,13 @@ private fun DrawerContent(
     val coroutineScope = rememberCoroutineScope()
 
     val currentBack by navController.currentBackStackEntryAsState()
-    val rotaAtual = currentBack?.destination?.route ?: SECRotas.TELA_SAPATOS_ROTA
+    val rotaAtual = currentBack?.destination?.route ?: SECRotas.TELA_CHAVES_ROTA
 
     val ehRotaUm = rotaAtual == SECRotas.TELA_SAPATOS_ROTA
     val ehRotaDois = rotaAtual == SECRotas.TELA_CHAVES_ROTA
     val ehRotaTres = rotaAtual == SECRotas.TELA_FINANCAS_ROTA
+    val ehRotaQuatro = rotaAtual == SECRotas.TELA_PEDIDOS_ROTA
+
 
     Column(
         modifier = Modifier
@@ -114,9 +122,8 @@ private fun DrawerContent(
                 }
             }) {
             Icon(
-                //imageVector = Icons.Default.Call,
                 painter = painterResource(id = R.drawable.sapato),
-                contentDescription = "c",
+                contentDescription = "s",
                 modifier = Modifier.size(80.dp).
                 padding(10.dp),
                 tint = getColorTexto(ehRotaUm)
@@ -159,12 +166,33 @@ private fun DrawerContent(
             Icon(
                 //imageVector = Icons.Default.Call,
                 painter = painterResource(id = R.drawable.cifrao),
-                contentDescription = "c",
+                contentDescription = "f",
                 modifier = Modifier.size(80.dp).
                 padding(10.dp),
                 tint = getColorTexto(ehRotaTres)
             )
             Text(text = "Finanças", fontSize = 30.sp,
+                color = getColorTexto(ehRotaTres))
+        }
+        TextButton(
+            colors = ButtonDefaults.buttonColors(
+                containerColor = getColorMenu(ehRotaQuatro)
+            ),
+            onClick = {
+                navController.navigate(SECRotas.TELA_PEDIDOS_ROTA)
+                coroutineScope.launch {
+                    drawerState.close()
+                }
+            }) {
+            Icon(
+                //imageVector = Icons.Default.Call,
+                painter = painterResource(id = R.drawable.pedido),
+                contentDescription = "p",
+                modifier = Modifier.size(80.dp).
+                padding(10.dp),
+                tint = getColorTexto(ehRotaQuatro)
+            )
+            Text(text = "Pedidos", fontSize = 30.sp,
                 color = getColorTexto(ehRotaTres))
         }
     }

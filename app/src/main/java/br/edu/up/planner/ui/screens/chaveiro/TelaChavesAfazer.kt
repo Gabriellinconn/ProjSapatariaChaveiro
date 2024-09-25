@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.edu.up.planner.ui.screens.util.PlannerTopBar
+import br.edu.up.planner.ui.screens.util.SECTopBar
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,111 +27,71 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
 
-object TarefasRota {
-    val TELA_LISTAR_CHAVES_ROTA = "listar_sapatos"
-    val TELA_INCLUIR_CHAVES_ROTA = "incluir_sapatos"
+object ChavesRota {
+    val TELA_LISTAR_CHAVES_ROTA = "listar_chaves"
+    val TELA_INCLUIR_CHAVES_ROTA = "incluir_chaves"
 }
 
 
 @Composable
 fun TelaChavesAfazer(
     drawerState: DrawerState,
-    navCtrlBottomNav: NavController
 ) {
 
     var serviçosChaves = mutableListOf(
         ChavesAfazer(
-
-
-            nomeSapato = "Tênis Nike",
-            descricao = "Colar Sola",
-            preco = 18.00,
+            modelochave = "Chave Papaiz",
+            cliente = "Wellinton",
+            preco = 24.00,
             formaPagamento = 1,
-            par = false,
+            tipo = 1,
             concluido = false,
             pago = true,
-            id = 1
+            id = 1,
+            quantidade = 2
         ),
         ChavesAfazer(
-
-
-            nomeSapato = "Tênis Nike",
-            descricao = "Colar Sola",
+            modelochave = "Chave GOLD",
+            cliente = "Cleber",
             preco = 18.00,
-            formaPagamento = 1,
-            par = false,
-            concluido = false,
-            pago = true,
-            id = 1
-        ),
-        ChavesAfazer(
-
-
-            nomeSapato = "Tênis Nike",
-            descricao = "Colar Sola",
-            preco = 18.00,
-            formaPagamento = 1,
-            par = false,
-            concluido = false,
-            pago = true,
-            id = 1
-        ),
-        ChavesAfazer(
-
-
-            nomeSapato = "Tênis Nike",
-            descricao = "Colar Sola",
-            preco = 18.00,
-            formaPagamento = 1,
-            par = false,
-            concluido = false,
-            pago = true,
-            id = 1
-        ),
-        ChavesAfazer(
-
-
-            nomeSapato = "Tênis Nike",
-            descricao = "Colar Sola",
-            preco = 18.00,
-            formaPagamento = 1,
-            par = false,
-            concluido = false,
-            pago = true,
-            id = 1
-        ),
-        ChavesAfazer(
-            nomeSapato = "Sapato Feminino",
-            descricao = "Restaurar Taco e Sola",
-            preco = 50.00,
-            formaPagamento = 4,
-            par = true,
+            formaPagamento = 2,
+            tipo = 2,
             concluido = true,
             pago = false,
-            id = 2
-        )
+            id = 2,
+            quantidade = 1
+        ),
+        ChavesAfazer(
+            modelochave = "Aliança",
+            cliente = "Junior",
+            preco = 36.00,
+            formaPagamento = 3,
+            tipo = 1,
+            concluido = false,
+            pago = false,
+            id = 3,
+            quantidade = 1
+        ),
     )
 
     val navCtrlTarefas = rememberNavController()
 
 
     Scaffold(
-        topBar = { PlannerTopBar(drawerState) },
+        topBar = { SECTopBar(drawerState) },
         content = { padding ->  padding
             NavHost(
                 navController = navCtrlTarefas,
-                startDestination = TarefasRota.TELA_LISTAR_CHAVES_ROTA)
+                startDestination = ChavesRota.TELA_LISTAR_CHAVES_ROTA)
             {
-                composable(TarefasRota.TELA_LISTAR_CHAVES_ROTA) {
-                    TelaListagemSapatos(serviçosChaves)
+                composable(ChavesRota.TELA_LISTAR_CHAVES_ROTA) {
+                    TelaListagemChaves(serviçosChaves)
                 }
-                composable(TarefasRota.TELA_INCLUIR_CHAVES_ROTA) {
+                composable(ChavesRota.TELA_INCLUIR_CHAVES_ROTA) {
                     Column(modifier = Modifier.fillMaxSize()) {
                         Spacer(modifier = Modifier.height(200.dp))
                         Text(text = "TELA DE INCLUIR AFAZER")
@@ -143,12 +103,11 @@ fun TelaChavesAfazer(
 
         },
         floatingActionButton = { FloatButton() },
-        bottomBar = { TelaUmBottomBar(navCtrlBottomNav) }
-    )
+        )
 }
 
 @Composable
-private fun TelaListagemSapatos(chavesAfazer: MutableList<ChavesAfazer>) {
+private fun TelaListagemChaves(chavesAfazer: MutableList<ChavesAfazer>) {
 
     LazyColumn(
 
@@ -159,7 +118,7 @@ private fun TelaListagemSapatos(chavesAfazer: MutableList<ChavesAfazer>) {
     ) {
 
 
-        items(chavesAfazer) { sapatoAfazer ->
+        items(chavesAfazer) { chavesAfazer ->
 
 
 
@@ -176,27 +135,35 @@ private fun TelaListagemSapatos(chavesAfazer: MutableList<ChavesAfazer>) {
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = sapatoAfazer.nomeSapato,
+                        text = chavesAfazer.modelochave,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 5.dp)
                     )
 
                     Text(
-                        text = sapatoAfazer.descricao,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                    Text(
-                        text = "#${sapatoAfazer.id}",
-                        fontSize = 14.sp,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                    Text(
-                        text = if(sapatoAfazer.par) "Par" else "Um pé",
+                        text = if(chavesAfazer.tipo == 1) "Chave Normal" else "Chave Tetra",
                         fontSize = 16.sp,
                         modifier = Modifier.padding(bottom = 0.dp)
                     )
+
+                    Text(
+                        text = "${chavesAfazer.quantidade}",
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(bottom = 5.dp)
+                    )
+
+                    Text(
+                        text = chavesAfazer.cliente,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(bottom = 5.dp)
+                    )
+                    Text(
+                        text = "#${chavesAfazer.id}",
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(bottom = 5.dp)
+                    )
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -205,13 +172,13 @@ private fun TelaListagemSapatos(chavesAfazer: MutableList<ChavesAfazer>) {
                     ) {
 
                         Text(
-                            text = "R$ ${sapatoAfazer.preco}",
+                            text = "R$ ${chavesAfazer.preco}",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(end = 8.dp)
                         )
 
                         Text(
-                            text = when (sapatoAfazer.formaPagamento) {
+                            text = when (chavesAfazer.formaPagamento) {
                                 1 -> "Dinheiro"
                                 2 -> "Cartão"
                                 3 -> "Pix"
@@ -221,15 +188,15 @@ private fun TelaListagemSapatos(chavesAfazer: MutableList<ChavesAfazer>) {
                         )
 
                         Text(
-                            text = if (sapatoAfazer.pago) "Pago" else "Não pago",
-                            color = if (sapatoAfazer.concluido) Color.Red else Color.Green,
+                            text = if (chavesAfazer.pago) "Pago" else "Não pago",
+                            color = if (chavesAfazer.concluido) Color.Red else Color.Green,
                             fontWeight = FontWeight.SemiBold
                         )
                     }
 
                     Text(
-                        text = if (sapatoAfazer.concluido) "Concluído" else "Pendente",
-                        color = if (sapatoAfazer.concluido) Color.Green else Color.Yellow,
+                        text = if (chavesAfazer.concluido) "Concluído" else "Pendente",
+                        color = if (chavesAfazer.concluido) Color.Green else Color.Yellow,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -243,12 +210,13 @@ private fun TelaListagemSapatos(chavesAfazer: MutableList<ChavesAfazer>) {
 
 data class ChavesAfazer(
     var pago: Boolean,
-    var nomeSapato: String,
-    var descricao: String,
+    var modelochave: String,
+    var cliente: String,
     var concluido: Boolean = false,
     var preco: Double,
-    var formaPagamento: Int, //1 = dinheiro, 2 = cartão, 3 = pix, 4 = não informado
-    var par: Boolean = false,
+    var formaPagamento: Int? = null, //1 = dinheiro, 2 = cartão, 3 = pix, 4 = não informado
+    var tipo: Int , //1 = normal, 2 = tetra
+    var quantidade: Int,
     var id: Int? = null
 )
 

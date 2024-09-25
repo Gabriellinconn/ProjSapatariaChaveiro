@@ -32,7 +32,7 @@ fun TelaUmBottomBar(navController: NavController) {
                     modifier = Modifier.size(40.dp)
                 )
             },
-            label = { Text(text = "Sapatos") }
+            label = { Text(text = "Serviços") }
         )
         NavigationBarItem(
             selected = false,

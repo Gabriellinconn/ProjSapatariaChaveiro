@@ -1,27 +1,29 @@
-package br.edu.up.planner.ui.screens.chaveiro
+package br.edu.up.planner.ui.screens.pedido
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.edu.up.planner.TelaPedidos
 
-object TelaDois {
-    val TELA_CHAVEIRO_ROUTE = "t2a"
+
+object TelaQuatro {
+    val TELA_PEDIDOS_ROUTE = "t4a"
 
 }
 
 
 @Composable
-fun ChaveiroNavHost(drawerState: DrawerState) {
+fun PedidoNavHost(drawerState: DrawerState) {
 
     val navCtrlBottonNav = rememberNavController()
     NavHost(
         navController = navCtrlBottonNav,
-        startDestination = TelaDois.TELA_CHAVEIRO_ROUTE
+        startDestination = TelaQuatro.TELA_PEDIDOS_ROUTE
     ) {
-        composable(TelaDois.TELA_CHAVEIRO_ROUTE) {
-            TelaChavesAfazer(drawerState)
+        composable(TelaQuatro.TELA_PEDIDOS_ROUTE) {
+            TelaPedidos(drawerState)
         }
     }
 }

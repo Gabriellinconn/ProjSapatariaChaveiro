@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlannerTopBar(drawerState: DrawerState){
+fun SECTopBar(drawerState: DrawerState){
 
     val coroutineScope = rememberCoroutineScope()
 
