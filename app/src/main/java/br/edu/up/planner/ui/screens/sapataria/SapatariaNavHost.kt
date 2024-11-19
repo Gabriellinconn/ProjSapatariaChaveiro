@@ -16,20 +16,22 @@ object TelaUm {
 @Composable
 fun SapatariaNavHost(drawerState: DrawerState) {
 
-    val navCtrlBottonNav = rememberNavController()
+    val navController = rememberNavController()
     NavHost(
-        navController = navCtrlBottonNav,
+        navController = navController,
         startDestination = TelaUm.TELA_SAPATARIA_ROUTE
     ) {
         composable(TelaUm.TELA_SAPATARIA_ROUTE) {
-            TelaSapatosAfazer(drawerState, navCtrlBottonNav)
+            TelaSapatosAfazer(drawerState, navController)
         }
         composable(TelaUm.TELA_PAGAMENTOS_ROUTE) {
-            TelaPagamentos(drawerState, navCtrlBottonNav)
+            TelaPagamentos(drawerState, navController)
         }
         composable(TelaUm.TELA_REALIZADOS_ROUTE) {
-            TelaRealizados(drawerState, navCtrlBottonNav)
+            TelaRealizados(drawerState, navController)
         }
+
+
     }
 }
 

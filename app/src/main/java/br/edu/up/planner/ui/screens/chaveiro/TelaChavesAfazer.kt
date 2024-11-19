@@ -1,51 +1,39 @@
 package br.edu.up.planner.ui.screens.chaveiro
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import br.edu.up.planner.ui.screens.util.SECTopBar
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Card
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.edu.up.planner.ui.screens.util.SECTopBar
 
+// Rotas
 object ChavesRota {
-    val TELA_LISTAR_CHAVES_ROTA = "listar_chaves"
-    val TELA_INCLUIR_CHAVES_ROTA = "incluir_chaves"
+    const val TELA_LISTAR_CHAVES_ROTA = "listar_chaves"
+    const val TELA_INCLUIR_CHAVES_ROTA = "incluir_chaves"
 }
 
-
+// Tela principal
 @Composable
-fun TelaChavesAfazer(
-    drawerState: DrawerState,
-) {
-
-    var serviçosChaves = mutableListOf(
+fun TelaChavesAfazer(drawerState: DrawerState) {
+    val serviçosChaves = mutableListOf(
         ChavesAfazer(
             modelochave = "Chave Papaiz",
-            cliente = "Wellinton",
+            nomecliente = "Wellinton",
             preco = 24.00,
             formaPagamento = 1,
             tipo = 1,
@@ -56,7 +44,7 @@ fun TelaChavesAfazer(
         ),
         ChavesAfazer(
             modelochave = "Chave GOLD",
-            cliente = "Cleber",
+            nomecliente = "Cleber",
             preco = 18.00,
             formaPagamento = 2,
             tipo = 2,
@@ -67,7 +55,7 @@ fun TelaChavesAfazer(
         ),
         ChavesAfazer(
             modelochave = "Aliança",
-            cliente = "Junior",
+            nomecliente = "Junior",
             preco = 36.00,
             formaPagamento = 3,
             tipo = 1,
@@ -80,105 +68,91 @@ fun TelaChavesAfazer(
 
     val navCtrlTarefas = rememberNavController()
 
-
     Scaffold(
         topBar = { SECTopBar(drawerState) },
-        content = { padding ->  padding
-            NavHost(
-                navController = navCtrlTarefas,
-                startDestination = ChavesRota.TELA_LISTAR_CHAVES_ROTA)
-            {
-                composable(ChavesRota.TELA_LISTAR_CHAVES_ROTA) {
-                    TelaListagemChaves(serviçosChaves)
-                }
-                composable(ChavesRota.TELA_INCLUIR_CHAVES_ROTA) {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        Spacer(modifier = Modifier.height(200.dp))
-                        Text(text = "TELA DE INCLUIR AFAZER")
+        content = { paddingValues ->
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+            ) {
+                NavHost(
+                    navController = navCtrlTarefas,
+                    startDestination = ChavesRota.TELA_LISTAR_CHAVES_ROTA
+                ) {
+                    composable(ChavesRota.TELA_LISTAR_CHAVES_ROTA) {
+                        TelaListagemChaves(chavesAfazer = serviçosChaves)
                     }
-
+                    composable(ChavesRota.TELA_INCLUIR_CHAVES_ROTA) {
+                        TelaIncluirChaves()
+                    }
                 }
             }
-
-
         },
-        floatingActionButton = { FloatButton() },
-        )
+        floatingActionButton = {
+            FloatButton(navController = navCtrlTarefas)
+        }
+    )
 }
 
+// Tela de listagem
 @Composable
 private fun TelaListagemChaves(chavesAfazer: MutableList<ChavesAfazer>) {
-
     LazyColumn(
-
-        modifier = Modifier.padding(top = 70.dp).padding(bottom = 90.dp).fillMaxSize(),
-
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 16.dp, bottom = 90.dp),
         contentPadding = PaddingValues(16.dp)
-
     ) {
-
-
-        items(chavesAfazer) { chavesAfazer ->
-
-
-
+        items(chavesAfazer) { chave ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
                 shape = RoundedCornerShape(8.dp),
-
-                ) {
+            ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = chavesAfazer.modelochave,
+                        text = chave.modelochave,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 5.dp)
                     )
-
                     Text(
-                        text = if(chavesAfazer.tipo == 1) "Chave Normal" else "Chave Tetra",
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(bottom = 0.dp)
-                    )
-
-                    Text(
-                        text = "${chavesAfazer.quantidade}",
-                        fontSize = 14.sp,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-
-                    Text(
-                        text = chavesAfazer.cliente,
+                        text = if (chave.tipo == 1) "Chave Normal" else "Chave Tetra",
                         fontSize = 16.sp,
                         modifier = Modifier.padding(bottom = 5.dp)
                     )
                     Text(
-                        text = "#${chavesAfazer.id}",
+                        text = "Quantidade: ${chave.quantidade}",
                         fontSize = 14.sp,
                         modifier = Modifier.padding(bottom = 5.dp)
                     )
-
+                    Text(
+                        text = "Cliente: ${chave.nomecliente}",
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(bottom = 5.dp)
+                    )
+                    Text(
+                        text = "#${chave.id}",
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(bottom = 5.dp)
+                    )
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 5.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-
                         Text(
-                            text = "R$ ${chavesAfazer.preco}",
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(end = 8.dp)
+                            text = "R$ ${chave.preco}",
+                            fontSize = 16.sp
                         )
-
                         Text(
-                            text = when (chavesAfazer.formaPagamento) {
+                            text = when (chave.formaPagamento) {
                                 1 -> "Dinheiro"
                                 2 -> "Cartão"
                                 3 -> "Pix"
@@ -186,49 +160,89 @@ private fun TelaListagemChaves(chavesAfazer: MutableList<ChavesAfazer>) {
                             },
                             fontSize = 16.sp
                         )
-
                         Text(
-                            text = if (chavesAfazer.pago) "Pago" else "Não pago",
-                            color = if (chavesAfazer.concluido) Color.Red else Color.Green,
+                            text = if (chave.pago) "Pago" else "Não pago",
+                            color = if (chave.concluido) Color.Green else Color.Red,
                             fontWeight = FontWeight.SemiBold
                         )
                     }
-
                     Text(
-                        text = if (chavesAfazer.concluido) "Concluído" else "Pendente",
-                        color = if (chavesAfazer.concluido) Color.Green else Color.Yellow,
+                        text = if (chave.concluido) "Concluído" else "Pendente",
+                        color = if (chave.concluido) Color.Green else Color.Yellow,
                         fontWeight = FontWeight.Bold
                     )
                 }
-
             }
         }
     }
 }
 
-
-
-data class ChavesAfazer(
-    var pago: Boolean,
-    var modelochave: String,
-    var cliente: String,
-    var concluido: Boolean = false,
-    var preco: Double,
-    var formaPagamento: Int? = null, //1 = dinheiro, 2 = cartão, 3 = pix, 4 = não informado
-    var tipo: Int , //1 = normal, 2 = tetra
-    var quantidade: Int,
-    var id: Int? = null
-)
-
-
+// Tela de inclusão
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun FloatButton() {
-    FloatingActionButton(onClick = { }) {
+fun TelaIncluirChaves() {
+    var nomeCliente by remember { mutableStateOf("") }
+    var modelochave by remember { mutableStateOf("") }
+    var quantidade by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Adicionar Pedido", fontSize = 24.sp, color = Color.Black)
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = nomeCliente,
+            onValueChange = { nomeCliente = it },
+            label = { Text("Nome do Cliente") },
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = modelochave,
+            onValueChange = { modelochave = it },
+            label = { Text("Modelo da Chave") },
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = quantidade,
+            onValueChange = { quantidade = it },
+            label = { Text("Quantidade") },
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { /* Adicionar ação de salvar */ }) {
+            Text("Adicionar Pedido")
+        }
+    }
+}
+
+// Botão flutuante
+@Composable
+fun FloatButton(navController: NavController) {
+    FloatingActionButton(onClick = {
+        navController.navigate(ChavesRota.TELA_INCLUIR_CHAVES_ROTA)
+    }) {
         Icon(
             imageVector = Icons.Default.Add,
-            contentDescription = "+"
+            contentDescription = "Adicionar"
         )
     }
 }
 
-
+// Classe de dados
+data class ChavesAfazer(
+    var pago: Boolean,
+    var modelochave: String,
+    var nomecliente: String,
+    var concluido: Boolean = false,
+    var preco: Double,
+    var formaPagamento: Int? = null,
+    var tipo: Int, // 1 = Normal, 2 = Tetra
+    var quantidade: Int,
+    var id: Int? = null
+)

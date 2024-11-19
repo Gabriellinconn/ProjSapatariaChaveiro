@@ -41,14 +41,9 @@ object SECRotas {
     val TELA_SAPATOS_ROTA = "tela_um"
     val TELA_CHAVES_ROTA = "tela_dois"
     val TELA_FINANCAS_ROTA = "tela_tres"
-    val TELA_PEDIDOS_ROTA = "tela_quatro"
 
 }
 
-
-@Preview(
-    device = Devices.PIXEL
-)
 @Composable
 fun SECNavDrawer(){
 
@@ -76,9 +71,6 @@ fun SECNavDrawer(){
                 composable(SECRotas.TELA_FINANCAS_ROTA) {
                     TelaFinancas(drawerState)
                 }
-                composable(SECRotas.TELA_PEDIDOS_ROTA) {
-                    PedidoNavHost(drawerState)
-                }
 
             }
         }
@@ -99,7 +91,6 @@ private fun DrawerContent(
     val ehRotaUm = rotaAtual == SECRotas.TELA_SAPATOS_ROTA
     val ehRotaDois = rotaAtual == SECRotas.TELA_CHAVES_ROTA
     val ehRotaTres = rotaAtual == SECRotas.TELA_FINANCAS_ROTA
-    val ehRotaQuatro = rotaAtual == SECRotas.TELA_PEDIDOS_ROTA
 
 
     Column(
@@ -174,29 +165,10 @@ private fun DrawerContent(
             Text(text = "Finanças", fontSize = 30.sp,
                 color = getColorTexto(ehRotaTres))
         }
-        TextButton(
-            colors = ButtonDefaults.buttonColors(
-                containerColor = getColorMenu(ehRotaQuatro)
-            ),
-            onClick = {
-                navController.navigate(SECRotas.TELA_PEDIDOS_ROTA)
-                coroutineScope.launch {
-                    drawerState.close()
-                }
-            }) {
-            Icon(
-                //imageVector = Icons.Default.Call,
-                painter = painterResource(id = R.drawable.pedido),
-                contentDescription = "p",
-                modifier = Modifier.size(80.dp).
-                padding(10.dp),
-                tint = getColorTexto(ehRotaQuatro)
-            )
-            Text(text = "Pedidos", fontSize = 30.sp,
-                color = getColorTexto(ehRotaTres))
+
         }
     }
-}
+
 
 fun getColorMenu(estaSelecionada: Boolean): Color {
     if (estaSelecionada){
