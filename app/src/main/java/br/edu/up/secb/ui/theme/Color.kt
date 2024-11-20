@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.theme
+package br.edu.up.secb.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

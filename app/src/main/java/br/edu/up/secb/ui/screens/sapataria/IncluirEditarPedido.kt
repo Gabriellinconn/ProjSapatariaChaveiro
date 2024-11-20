@@ -1,4 +1,4 @@
-package br.edu.up.planner
+package br.edu.up.secb
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -21,6 +21,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,7 +33,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.edu.up.planner.ui.theme.CorDoTitulo
+import androidx.navigation.NavController
+import br.edu.up.secb.dados.SapatosAfazer
+import br.edu.up.secb.ui.theme.CorDoTitulo
 import kotlinx.coroutines.launch
 import androidx.compose.material3.OutlinedTextField as OutlinedTextField1
 import androidx.compose.material3.Text as Text1
@@ -41,11 +44,35 @@ import androidx.compose.material3.Text as Text1
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun TelaPedidos(drawerState: DrawerState) {
+fun IncluirEditarPedido(
+    sapatoId: Int? = null
+    viewModel: SapatosAfazerViewModel,
+    navController: NavController
+){
+
+    var coroutineScope = rememberCoroutineScope()
 
     var nomeCliente by remember { mutableStateOf("") }
     var tipoSapato by remember { mutableStateOf("") }
-    var tarefa by remember { mutableStateOf("") }
+    var fazer by remember { mutableStateOf("") }
+
+    var sapatosAfazer: SapatosAfazer? by remember { mutableStateOf(null) }
+
+    var label = if (sapatoId == null) "Novo Sapato" else "Editar Sapato"
+
+    LaunchedEffect(sapatoId) {
+        coroutineScope.launch {
+            if(sapatoId != null){
+                sapatosAfazer = viewModel.buscarPorId(sapatoId)
+                sapatosAfazer?.let {
+                    nomeCliente = it.nomeCliente
+                    tipoSapato = it.tipoSapato
+                    fazer = it.fazer
+                }
+            }
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -114,8 +141,8 @@ fun TelaPedidos(drawerState: DrawerState) {
 
 
         OutlinedTextField1(
-            value = tarefa,
-            onValueChange = { tarefa = it },
+            value = fazer,
+            onValueChange = { fazer = it },
             label = { Text1("O que precisa fazer") },
             modifier = Modifier
                 .fillMaxWidth()

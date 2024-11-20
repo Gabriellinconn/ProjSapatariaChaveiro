@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.util
+package br.edu.up.secb.ui.screens.util
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.edu.up.planner.ui.theme.CorDoTitulo
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,6 +47,7 @@ fun SECTopBar(drawerState: DrawerState){
                 modifier = Modifier.padding(20.dp)
             )
         },
-        colors = TopAppBarDefaults.topAppBarColors(CorDoTitulo)
+        colors = TopAppBarDefaults.topAppBarColors(Color(0xFFEECD31)
+    )
     )
 }

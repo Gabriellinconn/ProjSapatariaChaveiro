@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.sapataria
+package br.edu.up.secb.ui.screens.sapataria
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.edu.up.planner.ui.screens.util.SECTopBar
-import br.edu.up.planner.ui.screens.util.TelaUmBottomBar
+import br.edu.up.secb.ui.screens.util.SECTopBar
+import br.edu.up.secb.ui.screens.util.TelaUmBottomBar
 
 @Composable
 fun TelaRealizados(

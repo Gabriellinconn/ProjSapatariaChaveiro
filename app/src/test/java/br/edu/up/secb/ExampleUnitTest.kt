@@ -1,4 +1,4 @@
-package br.edu.up.planner
+package br.edu.up.secb
 
 import org.junit.Test
 

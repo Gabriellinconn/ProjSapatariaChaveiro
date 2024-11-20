@@ -1,4 +1,4 @@
-package br.edu.up.planner
+package br.edu.up.secb
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

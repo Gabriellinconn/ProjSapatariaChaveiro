@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.financas
+package br.edu.up.secb.ui.screens.financas
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.edu.up.planner.ui.screens.util.SECTopBar
+import br.edu.up.secb.ui.screens.util.SECTopBar
 
 @Composable
 fun TelaFinancas(drawerState: DrawerState) {

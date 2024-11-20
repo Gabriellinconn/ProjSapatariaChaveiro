@@ -1,4 +1,4 @@
-package br.edu.up.planner.ui.screens.util
+package br.edu.up.secb.ui.screens.util
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import br.edu.up.planner.ui.screens.sapataria.TelaUm
+import br.edu.up.secb.ui.screens.sapataria.TelaUm
 
 
 @Composable
